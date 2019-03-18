@@ -9,7 +9,7 @@ Elessar
 
 Demonstration
 ------------
-![demo](https://souzace.github.io/Elessar/demos/index.html)
+[Demo](https://souzace.github.io/Elessar/demos/index.html)
 
 Using
 -----
