@@ -16,63 +16,63 @@ Using
 
 Elessar exports as a CommonJS (Node) module, an AMD module, or a browser global:
 ```javascript
-var period = [];
-  for(var i=0; i < 7; i++){
+for(var i=0; i < 7; i++){
 
-    $('.rangebar_' + i).html(RangeBar({
-      min: moment().startOf('day').format('LLLL'),
-      max: moment().startOf('day').add(1, 'day').format('LLLL'),
-      valueFormat: function(ts) {
-        return moment(ts).format('HH:mm');
-      },
-      valueParse: function(date) {
-        return moment(date).valueOf();
-      },
-      values: [],
-      label: function(a){return a[0] + '-' + a[1]},
-      snap: 1000 * 60 * 15,
-      minSize: 1000 * 60 * 60,
-      bgLabels: 24,
-      allowDelete: true
-    }).$el);
-  }
+  $('.rangebar_' + i).html(RangeBar({
+    min: moment().startOf('day').format('LLLL'),
+    max: moment().startOf('day').add(1, 'day').format('LLLL'),
+    valueFormat: function(ts) {
+      return moment(ts).format('HH:mm');
+    },
+    valueParse: function(date) {
+      return moment(date).valueOf();
+    },
+    values: [],
+    label: function(a){return a[0] + '-' + a[1]},
+    snap: 1000 * 60 * 15,
+    minSize: 1000 * 60 * 60,
+    bgLabels: 24,
+    allowDelete: true
+  }).$el);
+}
 
-  $(document).ready(function() {
-    var week =
-      {
-        "monday" : [],
-        "tuesday": [],
-        "wednesday": [],
-        "thursday": [],
-        "friday": [],
-        "saturday": [],
-        "sunday": []
+$(document).ready(function() {
+  var week =
+  {
+    "monday" : [],
+    "tuesday": [],
+    "wednesday": [],
+    "thursday": [],
+    "friday": [],
+    "saturday": [],
+    "sunday": []
+  };
+
+  $("#generateObj").on("click", function(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+
+    var selectedPeriods = [];
+    var days = Object.keys(week);
+    for(var i =0; i < days.length; i++) {
+      var weekDayName = days[i];
+
+      var weekDayPeriods = $("#" + weekDayName + " .elessar-barlabel");
+
+      for(var x =0; x < weekDayPeriods.length; x++ ){
+        var period = (weekDayPeriods[x].innerText) ? weekDayPeriods[x].innerText : '';
+        if (period.length > 0) week[weekDayName][x] = period;
       }
-    ;
+    }
+    console.log(week);
+    var jsonObjToApi = JSON.stringify(week);
+    console.log(jsonObjToApi);
+    var jsonObjToView = JSON.stringify(week, null, 2);
+    $("#weekRangeObj").html(jsonObjToView);
 
-    $("#generateObj").on("click", function(ev) {
-      ev.stopPropagation();
-      ev.preventDefault();
+  });
 
-      var selectedPeriods = [];
-      var days = Object.keys(week);
-      for(var i =0; i < days.length; i++) {
-        var weekDayName = days[i];
-
-        var weekDayPeriods = $("#" + weekDayName + " .elessar-barlabel");
-
-        for(var x =0; x < weekDayPeriods.length; x++ ){
-          var period = (weekDayPeriods[x].innerText) ? weekDayPeriods[x].innerText : '';
-          if (period.length > 0) week[weekDayName][x] = period;
-        }
-      }
-      console.log(week);
-      var jsonObjToApi = JSON.stringify(week);
-      console.log(jsonObjToApi);
-      var jsonObjToView = JSON.stringify(week, null, 2);
-      $("#weekRangeObj").html(jsonObjToView);
-
-    });
+});
 ```
 ```html
 <style>
