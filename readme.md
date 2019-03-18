@@ -5,9 +5,6 @@ Propose multirange like week calendar with Elessar
 
 Elessar
 =======
-![Browser Matrix](https://saucelabs.com/browser-matrix/quarterto.svg)
-
-Draggable multiple range sliders
 ![elessar draggable range demo](demo.gif)
 
 Installation
