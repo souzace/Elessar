@@ -4,7 +4,7 @@
 <script src="http://momentjs.com/downloads/moment.min.js"></script>
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script src="https://rawgithub.com/quarterto/Estira/master/index.js"></script>
-<script src="../dist/elessar.js"></script>
+<script src="../dist/elessar.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../elessar.css">
 <style>
   table {
@@ -70,7 +70,10 @@
     </tr>
   </tbody>
 </table>
-<button id="save">Salvar</button>
+<br />
+<button id="generateObj">Generate Object</button>
+<br />
+<pre id="weekRangeObj"></pre>
 <script>
   var period = [];
   for(var i=0; i < 7; i++){
@@ -116,33 +119,39 @@
   }
 
   $(document).ready(function() {
-    var week = [
-      "monday",
-      "tuesday",
-      "wednesday",
-      "thursday",
-      "friday",
-      "saturday",
-      "sunday"
-    ];
+    var week =
+      {
+        "monday" : [],
+        "tuesday": [],
+        "wednesday": [],
+        "thursday": [],
+        "friday": [],
+        "saturday": [],
+        "sunday": []
+      }
+    ;
 
-    $("#save").on("click", function(ev) {
+    $("#generateObj").on("click", function(ev) {
       ev.stopPropagation();
       ev.preventDefault();
 
       var selectedPeriods = [];
-      for(var i =0; i < week.length; i++) {
-        var weekDayName = week[i];
+      var days = Object.keys(week);
+      for(var i =0; i < days.length; i++) {
+        var weekDayName = days[i];
+
         var weekDayPeriods = $("#" + weekDayName + " .elessar-barlabel");
-        var weekDayObjs = {};
-        weekDayObjs[weekDayName] = [];
+
         for(var x =0; x < weekDayPeriods.length; x++ ){
           var period = (weekDayPeriods[x].innerText) ? weekDayPeriods[x].innerText : '';
-          if (period.length > 0) weekDayObjs[weekDayName][x] = period;
+          if (period.length > 0) week[weekDayName][x] = period;
         }
-        selectedPeriods.push(JSON.stringify(weekDayObjs));
       }
-      console.log(selectedPeriods.join());
+      console.log(week);
+      var jsonObjToApi = JSON.stringify(week);
+      console.log(jsonObjToApi);
+      var jsonObjToView = JSON.stringify(week, null, 2);
+      $("#weekRangeObj").html(jsonObjToView);
 
     });
 

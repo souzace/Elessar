@@ -1,7 +1,7 @@
-Unmaintained
+Week Multirange Elessar - Forked Repo.
 ===
 
-I do not have time or inclination to work on Elessar. Do not expect me to respond to your issues or pull requests.
+Propose multirange like week calendar with Elessar
 
 Elessar
 =======
@@ -17,10 +17,6 @@ Draggable multiple range sliders
 
 Installation
 ------------
-Elessar is available via npm and Bower, and as [standalone files](/dist):
-
-`npm install elessar` | `bower install elessar`
-----------------------|------------------------
 
 Elessar requires [jQuery](http://jquery.com). If you're using npm or Bower, it's installed as part of this step. If not: a) why not? they're pretty sweet, b) download it, and I assume you're just using `<script>` tags, so just add a `<script>` tag.
 
@@ -60,8 +56,8 @@ new RangeBar({
     label: id // string or function to write as the text of a label. functions are called with normalised values.
   },
   indicator: null, // pass a function(RangeBar, Indicator, Function?) Value to calculate where to put a current indicator, calling the function whenever you want the position to be recalculated
-  allowDelete: false, // set to true to enable double-middle-click-to-delete
-  deleteTimeout: 5000, // maximum time in ms between middle clicks
+  allowDelete: true, // set to false to disable double main click to delete
+  deleteTimeout: 5000, // maximum time in ms between main click
   vertical: false, // if true the rangebar is aligned vertically, and given the class elessar-vertical
   bounds: null, // a function that provides an upper or lower bound when a range is being dragged. call with the range that is being moved, should return an object with an upper or lower key
   htmlLabel: false, // if true, range labels are written as html
@@ -71,24 +67,13 @@ new RangeBar({
 
 API
 ---
-### ``.val()``
-Returns array of pairs of min and max values of each range.
+Some functions check original repor (https://github.com/quarterto-archive/Elessar)
 
-```javascript
-bar.val(); //=> [[0,20], [34,86]]
-```
+Acknowledgment
+---
+* @quarterto - Bren Brightwell https://github.com/quarterto-archive
+* @chlegou - Houcem Ben Amor Chlegou (https://codepen.io/chlegou/pen/mKZYKb)
 
-### ``.val(values)``
-Updates the ranges in the bar with the values. Returns the bar, for chaining.
-```javascript
-bar.val([[0,30], [40,68]]); //=> bar: RangeBar
-```
-
-### ``.on('changing' function(values, range))``
-Event that triggers constantly as the value changes. Useful for reactively triggering things in your UI. Callback is passed the current values of the ranges and the range element that is changing.
-
-### ``.on('change' function(values, range))``
-Event that triggers after the user has finished changing a range. Useful for updating a Backbone model. Callback is passed the current values of the ranges and the range element that has changed.
 
 Licence
 -------
