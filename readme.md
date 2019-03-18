@@ -7,11 +7,9 @@ Elessar
 =======
 ![elessar draggable range demo](demo.gif)
 
-Installation
+Demonstration
 ------------
-
-Elessar requires [jQuery](http://jquery.com). If you're using npm or Bower, it's installed as part of this step. If not: a) why not? they're pretty sweet, b) download it, and I assume you're just using `<script>` tags, so just add a `<script>` tag.
-
+(https://souzace.github.io/Elessar/demos/index.html)
 
 Using
 -----
