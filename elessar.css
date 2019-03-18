@@ -2,7 +2,7 @@
   display: block;
   background: black;
   height: 100%;
-  width: 5px;
+  width: 1px;
   cursor: ew-resize;
   position: absolute;
   top: 0;
@@ -21,7 +21,6 @@
   right: 0;
   top: auto;
   bottom: auto;
-  cursor: ns-resize;
 }
 .elessar-vertical .elessar-handle:first-child {
   top: 0;
@@ -45,14 +44,13 @@
 }
 .elessar-range {
   position: absolute;
-  cursor: pointer;
   cursor: -webkit-grab;
   cursor: -moz-grab;
   cursor: grab;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background: blue;
+  background: #17B0E3;
   width: 0;
   z-index: 10;
 }
@@ -82,12 +80,8 @@
   height: 30px;
   line-height: 30px;
   background: #ccc;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  text-align: center;
+  font-size: 10px;
 }
 .elessar-delete-confirm {
   background: red;
@@ -104,16 +98,11 @@ body.elessar-resizing,
 body.elessar-resizing .bar,
 body.elessar-resizing .handle {
   cursor: ew-resize !important;
-}
-body.elessar-resizing.elessar-resizing-vertical,
-body.elessar-resizing.elessar-resizing-vertical .bar,
-body.elessar-resizing.elessar-resizing-vertical .handle {
-  cursor: ns-resize !important;
+
 }
 body.elessar-dragging,
 body.elessar-dragging .bar,
 body.elessar-dragging .handle {
-  cursor: move !important;
   cursor: -webkit-grabbing !important;
   cursor: -moz-grabbing !important;
   cursor: grabbing !important;

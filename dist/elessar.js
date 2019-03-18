@@ -102,7 +102,7 @@ var Mark = Element.extend({
 	initialize: function initialize(options) {
 		initialize.super$.call(this, '<div class="elessar-label">');
 		this.$el.css(options.perant.edge('start'), (options.value * 100) + '%');
-	
+
 		if(typeof options.label === 'function') {
 			this.$el.text(options.label.call(this, options.perant.normalise(options.value)));
 		} else if(typeof options.label === 'string') {
@@ -196,6 +196,7 @@ var Range = Element.extend(vertical).extend({
       this.$el.addClass('elessar-readonly');
     }
     if(typeof this.options.label === 'function') {
+
       this.on('changing', function(ev, range) {
         self.writeLabel(
           self.options.label.call(self, range.map($.proxy(self.perant.normalise, self.perant)))
@@ -215,7 +216,7 @@ var Range = Element.extend(vertical).extend({
   writeLabel: function(text) {
     this.$el.find('.elessar-barlabel')[this.options.htmlLabel ? 'html' : 'text'](text);
   },
-  
+
   isVertical: function() {
     return this.perant.options.vertical;
   },
@@ -320,10 +321,9 @@ var Range = Element.extend(vertical).extend({
   click: function(ev) {
     ev.stopPropagation();
     ev.preventDefault();
-
     var self = this;
 
-    if(ev.which !== 2 || !this.perant.options.allowDelete) return;
+    if(ev.which === 2 || !this.perant.options.allowDelete) return;
 
     if(this.deleteConfirm) {
       this.perant.removeRange(this);
@@ -338,7 +338,6 @@ var Range = Element.extend(vertical).extend({
       }, this.perant.options.deleteTimeout);
     }
   },
-
   mousedown: function(ev) {
     ev.stopPropagation();
     ev.preventDefault();
@@ -738,7 +737,7 @@ module.exports = {
 	isVertical: function() {
 		return this.options.vertical;
 	},
-	
+
 	ifVertical: function(v, h) {
     return this.isVertical() ? v : h;
   },
