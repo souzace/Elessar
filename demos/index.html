@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
 <head>
-<script src="http://momentjs.com/downloads/moment.min.js"></script>
-<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="https://rawgithub.com/quarterto/Estira/master/index.js"></script>
 <script src="../dist/elessar.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../elessar.css">
@@ -87,7 +87,8 @@
       valueParse: function(date) {
         return moment(date).valueOf();
       },
-      values: [],
+      values: [
+      ],
       label: function(a){return a[0] + '-' + a[1]},
       snap: 1000 * 60 * 15,
       minSize: 1000 * 60 * 60,
