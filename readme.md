@@ -1,7 +1,7 @@
 Week Multirange Elessar - Forked Repo.
 ===
 
-Propose multirange like week calendar with Elessar
+Propose multirange like week calendar with Elessar [Original Repo](https://github.com/quarterto-archive/Elessar)
 
 Elessar
 =======
@@ -174,7 +174,7 @@ new RangeBar({
 
 API
 ---
-Some functions check original repor (https://github.com/quarterto-archive/Elessar)
+Some functions check original repo (https://github.com/quarterto-archive/Elessar)
 
 Acknowledgment
 ---
