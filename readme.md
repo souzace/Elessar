@@ -18,17 +18,134 @@ Using
 
 Elessar exports as a CommonJS (Node) module, an AMD module, or a browser global:
 ```javascript
-var RangeBar = require('elessar');
-```
-```javascript
-require(['elessar'], function(RangeBar) { ... });
+var period = [];
+  for(var i=0; i < 7; i++){
+
+    $('.rangebar_' + i).html(RangeBar({
+      min: moment().startOf('day').format('LLLL'),
+      max: moment().startOf('day').add(1, 'day').format('LLLL'),
+      valueFormat: function(ts) {
+        return moment(ts).format('HH:mm');
+      },
+      valueParse: function(date) {
+        return moment(date).valueOf();
+      },
+      values: [],
+      label: function(a){return a[0] + '-' + a[1]},
+      snap: 1000 * 60 * 15,
+      minSize: 1000 * 60 * 60,
+      bgLabels: 24,
+      allowDelete: true
+    }).$el);
+  }
+
+  $(document).ready(function() {
+    var week =
+      {
+        "monday" : [],
+        "tuesday": [],
+        "wednesday": [],
+        "thursday": [],
+        "friday": [],
+        "saturday": [],
+        "sunday": []
+      }
+    ;
+
+    $("#generateObj").on("click", function(ev) {
+      ev.stopPropagation();
+      ev.preventDefault();
+
+      var selectedPeriods = [];
+      var days = Object.keys(week);
+      for(var i =0; i < days.length; i++) {
+        var weekDayName = days[i];
+
+        var weekDayPeriods = $("#" + weekDayName + " .elessar-barlabel");
+
+        for(var x =0; x < weekDayPeriods.length; x++ ){
+          var period = (weekDayPeriods[x].innerText) ? weekDayPeriods[x].innerText : '';
+          if (period.length > 0) week[weekDayName][x] = period;
+        }
+      }
+      console.log(week);
+      var jsonObjToApi = JSON.stringify(week);
+      console.log(jsonObjToApi);
+      var jsonObjToView = JSON.stringify(week, null, 2);
+      $("#weekRangeObj").html(jsonObjToView);
+
+    });
 ```
 ```html
-<script src="path/to/elessar.js"></script>
+<style>
+  table {
+    width: 100%;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+</style>
 ```
-
-Create a rangebar with `var rangeBar = new RangeBar` then add `rangeBar.$el` to the DOM somewhere.
-
+```html
+<table>
+  <thead>
+    <tr>
+      <th style="width: 4%">Day</th>
+      <th>Periods</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Monday</td>
+      <td>
+        <div id="monday" class="rangebar_0"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Tuesday</td>
+      <td>
+        <div id="tuesday" class="rangebar_1"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Wednesday</td>
+      <td>
+        <div id="wednesday" class="rangebar_2"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Thursday</td>
+      <td>
+        <div id="thursday" class="rangebar_3"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Friday</td>
+      <td>
+        <div id="friday" class="rangebar_4"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Saturday</td>
+      <td>
+        <div id="saturday" class="rangebar_5"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Sunday</td>
+      <td>
+        <div id="sunday" class="rangebar_6"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<button id="generateObj">Generate Object</button>
+<br />
+<pre id="weekRangeObj"></pre>
+```
 Options
 -------
 ```javascript
